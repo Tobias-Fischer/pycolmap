@@ -13,7 +13,7 @@ else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 endif()
 
-add_subdirectory(pybind11)
+find_package(pybind11)
 
 
 if (${COLMAP_CUDA_ENABLED})
