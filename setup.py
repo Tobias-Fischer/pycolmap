@@ -6,6 +6,7 @@ import sys
 import platform
 import subprocess
 from pathlib import Path
+import shlex
 
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
@@ -36,7 +37,8 @@ class CMakeBuild(build_ext):
 
     def build_extension(self, ext):
         extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
-        cmake_args = [
+        cmake_args = shlex.split(os.getenv("CMAKE_ARGS", ""))
+        cmake_args += [
             '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
             '-DPYTHON_EXECUTABLE=' + sys.executable,
             '-DVERSION_INFO={}'.format(self.distribution.get_version()),
