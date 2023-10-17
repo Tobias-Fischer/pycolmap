@@ -30,7 +30,10 @@ std::string PrintPoint3D(const Point3D& point3D) {
 void init_point3D(py::module& m) {
   using Point3DMap = std::unordered_map<point3D_t, Point3D>;
 
-  py::bind_map<Point3DMap>(m, "MapPoint3DIdPoint3D")
+  py::class_<Point3DMap::key_type>(m, "Point3DKeyType");
+  py::class_<Point3DMap::mapped_type>(m, "Point3DValueType");
+
+  py::bind_map<Point3DMap, Point3DMap::key_type, Point3DMap::mapped_type>(m, "MapPoint3DIdPoint3D")
       .def("__repr__", [](const Point3DMap& self) {
         std::string repr = "{";
         bool is_first = true;
