@@ -24,4 +24,6 @@ pybind11_add_module(pycolmap pycolmap/main.cc)
 target_include_directories(pycolmap PRIVATE ${PROJECT_SOURCE_DIR})
 target_link_libraries(pycolmap PRIVATE colmap::colmap freeimage::FreeImage glog::glog)
 target_compile_definitions(pycolmap PRIVATE VERSION_INFO="${PROJECT_VERSION}")
-install(TARGETS pycolmap LIBRARY DESTINATION .)
+set_target_properties(pycolmap PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/pycolmap"
+)
