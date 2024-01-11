@@ -25,7 +25,7 @@ classifiers = [
 
 [tool.scikit-build]
 wheel.expand-macos-universal-tags = true
-
+cmake_args=['-G Ninja']
 
 [tool.cibuildwheel]
 build = "cp3{8,9,10,11}-{macosx,manylinux,win}*"
